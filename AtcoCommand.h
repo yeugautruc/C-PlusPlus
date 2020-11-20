@@ -2,6 +2,7 @@
 #include <string>
 #include "FileName.h"
 #include "Command.h"
+#include "DynCommandArray.h"
 
 class AtcoCommand
 {
@@ -9,16 +10,17 @@ private:
     /* data */
     std::string fileName;
     std::string wordSequence;
-    Command *commands;
-    int sizeCommands;
+    DynCommandArray commands;
     std::string date;
     std::string time;
     DateTime formattedDateTime;
-    void resizeCommand(Command *&inputArray, int &oldSize, int &newSize);
+
 public:
     AtcoCommand();
 
     AtcoCommand(std::string fileNameInput, std::string wordSequenceInput, std::string commandsInput);
+
+    AtcoCommand &operator=(const AtcoCommand &AtcocommandObject);
 
     void readCommands(std::string commandsInput);
 
@@ -26,11 +28,10 @@ public:
 
     std::string toString();
 
-
     const std::string getWordSequence();
 
     Command getcommands(int k);
-    
+
     const int getSizeCommands();
 
     const std::string getDate();

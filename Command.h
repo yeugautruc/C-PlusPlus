@@ -12,8 +12,8 @@ public:
     Command(std::string input);
     const std::string getCommands();
     const std::string getMainCommands();
-    Command(const Command& copy);
-    
+    Command(const Command &copy);
+    Command &operator=(const Command &c);
     ~Command();
 
 private:
@@ -21,3 +21,5 @@ private:
     std::string mainCommands;
     std::string readMainCommand(std::string input);
 };
+
+

@@ -5,8 +5,8 @@
 #include <iostream>
 #include <fstream>
 
-Command::Command(){
-
+Command::Command()
+{
 }
 
 Command::Command(std::string input)
@@ -37,16 +37,29 @@ std::string Command::readMainCommand(std::string input)
     return "";
 };
 
-const std::string Command::getCommands(){
+const std::string Command::getCommands()
+{
     return commands;
 };
-const std::string Command::getMainCommands(){
+const std::string Command::getMainCommands()
+{
     return mainCommands;
 };
 
-Command::Command(const Command& copy){
-    this->commands = copy.commands;
-    this->mainCommands = copy.mainCommands;
+Command::Command(const Command &c)
+{
+    this->commands = c.commands;
+    this->mainCommands = c.mainCommands;
+};
+
+Command &Command::operator=(const Command &c)
+{
+    if (this != &c)
+    {
+        this->commands = c.commands;
+        this->mainCommands = c.mainCommands;
+    };
+    return *this;
 };
 
 Command::~Command(){

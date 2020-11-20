@@ -20,39 +20,34 @@ AtcoCommand::AtcoCommand(std::string fileNameInput, std::string wordSequenceInpu
     readCommands(commandsInput);
 }
 
+AtcoCommand &AtcoCommand::operator=(const AtcoCommand &AtcocommandObject)
+{
+    if (this != &AtcocommandObject)
+    {
+        this->commands = AtcocommandObject.commands;
+        this->date = AtcocommandObject.date;
+        this->time = AtcocommandObject.time;
+        this->fileName = AtcocommandObject.fileName;
+        this->wordSequence = AtcocommandObject.wordSequence;
+        this->formattedDateTime = AtcocommandObject.formattedDateTime;
+    };
+
+    return *this;
+}
+
 void AtcoCommand::readCommands(std::string commandsInput)
 {
-    sizeCommands = 1;
-    commands = new Command[sizeCommands];
+    commands = DynCommandArray(1);
+     
     std::istringstream f(commandsInput);
     std::string line;
     while (getline(f, line))
     {
-        int newSize = sizeCommands + 1;
-        resizeCommand(commands, sizeCommands, newSize);
         Command cmd = Command(line);
-        commands[sizeCommands - 1] = cmd;
-        sizeCommands++;
+        commands.add(cmd);
     }
-
+   
 }
-
-void AtcoCommand::resizeCommand(Command *&inputArray, int &oldSize, int &newSize)
-{
-    Command *temp = new Command[oldSize];
-    for (int i = 0; i < oldSize; i++)
-    {
-        temp[i] = inputArray[i];
-    }
-    delete[] inputArray;
-
-    inputArray = new Command[newSize];
-    for (int i = 0; i < oldSize; i++)
-    {
-        inputArray[i] = temp[i];
-    }
-    delete[] temp;
-};
 
 void AtcoCommand::readDateTime(std::string input)
 {
@@ -63,11 +58,11 @@ void AtcoCommand::readDateTime(std::string input)
 std::string AtcoCommand::toString()
 {
     std::string output = fileName + " \n" + wordSequence + " :\n", command = "";
-    for (int i = 0; i < sizeCommands; i++)
+    for (int i = 0; i < commands.getSize(); i++)
     {
-        if (commands[i].getCommands().length() > 10)
+        if (commands.getElementArray(i).getCommands().length() > 10)
         {
-            command += commands[i].getCommands() + ";";
+            command += commands.getElementArray(i).getCommands() + ";";
         }
     }
     output += command;
@@ -79,6 +74,7 @@ const std::string AtcoCommand::getWordSequence()
 {
     return wordSequence;
 }
+
 AtcoCommand::~AtcoCommand()
 {
 }
@@ -93,11 +89,11 @@ const std::string AtcoCommand::getTime()
 }
 Command AtcoCommand::getcommands(int k)
 {
-    return commands[k];
+    return commands.getElementArray(k);
 };
 
 const int AtcoCommand::getSizeCommands(){
-    return sizeCommands;
+    return commands.getSize();
 };
 
 DateTime AtcoCommand::getFormattedDateTime()

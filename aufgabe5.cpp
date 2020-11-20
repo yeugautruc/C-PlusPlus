@@ -210,6 +210,7 @@ void initAtcoCommand(AtcoCommand *&a, string wert, int size)
 		AtcoCommand atcoCommand = AtcoCommand("2019-02-15__11-32-48-00:", wert, "ABP61 INIT_RESPONSE");
 		a[i] = atcoCommand;
 	}
+	
 };
 
 // Init atcoCommand array with value
