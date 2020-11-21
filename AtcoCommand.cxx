@@ -20,16 +20,26 @@ AtcoCommand::AtcoCommand(std::string fileNameInput, std::string wordSequenceInpu
     readCommands(commandsInput);
 }
 
-AtcoCommand &AtcoCommand::operator=(const AtcoCommand &AtcocommandObject)
+AtcoCommand::AtcoCommand(const AtcoCommand &copy)
 {
-    if (this != &AtcocommandObject)
+    this->commands = copy.commands;
+    this->date = copy.date;
+    this->time = copy.time;
+    this->fileName = copy.fileName;
+    this->wordSequence = copy.wordSequence;
+    this->formattedDateTime = copy.formattedDateTime;
+};
+
+AtcoCommand &AtcoCommand::operator=(const AtcoCommand &input)
+{
+    if (this != &input)
     {
-        this->commands = AtcocommandObject.commands;
-        this->date = AtcocommandObject.date;
-        this->time = AtcocommandObject.time;
-        this->fileName = AtcocommandObject.fileName;
-        this->wordSequence = AtcocommandObject.wordSequence;
-        this->formattedDateTime = AtcocommandObject.formattedDateTime;
+        this->commands = input.commands;
+        this->date = input.date;
+        this->time = input.time;
+        this->fileName = input.fileName;
+        this->wordSequence = input.wordSequence;
+        this->formattedDateTime = input.formattedDateTime;
     };
 
     return *this;
@@ -38,7 +48,7 @@ AtcoCommand &AtcoCommand::operator=(const AtcoCommand &AtcocommandObject)
 void AtcoCommand::readCommands(std::string commandsInput)
 {
     commands = DynCommandArray(1);
-     
+
     std::istringstream f(commandsInput);
     std::string line;
     while (getline(f, line))
@@ -46,7 +56,6 @@ void AtcoCommand::readCommands(std::string commandsInput)
         Command cmd = Command(line);
         commands.add(cmd);
     }
-   
 }
 
 void AtcoCommand::readDateTime(std::string input)
@@ -92,11 +101,13 @@ Command AtcoCommand::getElementFromCommandArray(int k)
     return commands.getElementArray(k);
 };
 
-DynCommandArray AtcoCommand::getDynCommands(){
+DynCommandArray AtcoCommand::getDynCommands()
+{
     return commands;
 };
 
-const int AtcoCommand::getSizeCommands(){
+const int AtcoCommand::getSizeCommands()
+{
     return commands.getSize();
 };
 

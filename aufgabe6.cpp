@@ -12,6 +12,8 @@
 #include "AtcoCommand.h"
 #include "Ocurrence.h"
 #include "DynCommandArray.h"
+#include "DynAtcoCommandArray.h"
+#include "DynOcurrenceArray.h"
 
 using namespace std;
 
@@ -256,32 +258,26 @@ struct UltilType
 
 	// Two dynamic array to save Occurence and AtcoCommand
 	Ocurrence *ocurrences;
-	AtcoCommand *atcoCommands;
+	DynAtcoCommandArray DynAtcoCommands;
 
 	int lengthArray{};
 
 	// Constructor
 	UltilType()
 	{
-		atcoCommands = new AtcoCommand[1];
+		DynAtcoCommands = DynAtcoCommandArray(1);
 		ocurrences = new Ocurrence[1];
 	}
 
 	// Constructor to get AtcoCommand from
-	UltilType(AtcoCommand *&arr, map<string, int> &w, map<string, int> &c, string &u, int &size)
+	UltilType(DynAtcoCommandArray &arr, map<string, int> &w, map<string, int> &c, string &u)
 	{
 		int sizeA = 1;
 		int sizeO = 1;
-		atcoCommands = new AtcoCommand[sizeA];
+		DynAtcoCommands = DynAtcoCommandArray(sizeA);
 		ocurrences = new Ocurrence[sizeO];
 
-		for (int i = 0; i < size; i++)
-		{
-			atcoCommands[sizeA - 1] = arr[i];
-			int newSize = sizeA + 1;
-			resizeAtcoCommand(atcoCommands, sizeA, newSize);
-			sizeA++;
-		}
+		DynAtcoCommands = arr;
 
 		// Itterator command map into Occurrence dynamic array
 		map<string, int>::iterator it = c.begin();
@@ -301,7 +297,7 @@ struct UltilType
 			sizeO++;
 		};
 
-		lengthArray = size;
+		lengthArray = arr.getSize();
 		wordsMap = w;
 		commandsMap = c;
 		url = u;
@@ -324,9 +320,9 @@ struct UltilType
 	{
 		for (size_t i = 0; i < unsigned(lengthArray); i++)
 		{
-			if (atcoCommands[i].toString().length() > 10)
+			if (DynAtcoCommands.getElementArray(i).toString().length() > 10)
 			{
-				cout << atcoCommands[i].toString() << endl;
+				cout << DynAtcoCommands.getElementArray(i).toString() << endl;
 			}
 		}
 		cout << topWords(wordsMap) << endl;
@@ -357,7 +353,7 @@ bool existsTest(const string &name)
 
 bool dateTimeSplitMethodTest(UltilType input, string testString)
 {
-	if (testString.find(input.atcoCommands[0].getFormattedDateTime().toString().substr(2, input.atcoCommands[0].getFormattedDateTime().toString().length() - 4)) != -1)
+	if (testString.find(input.DynAtcoCommands.getElementArray(0).getFormattedDateTime().toString().substr(2, input.DynAtcoCommands.getElementArray(0).getFormattedDateTime().toString().length() - 4)) != -1)
 	{
 		cout << "Test split                                 OK" << endl;
 		return true;
@@ -442,9 +438,9 @@ Check if more than 6 commands are read*/
 bool CanReadMoreThanSixCommandTest(UltilType input)
 {
 	int amountOfCommand = 0;
-	for (int i = 0; i < input.atcoCommands[2].getDynCommands().getSize(); i++)
+	for (int i = 0; i < input.DynAtcoCommands.getElementArray(2).getDynCommands().getSize(); i++)
 	{
-		if (input.atcoCommands[2].getDynCommands().getElementArray(i).getCommands().length() > 3)
+		if (input.DynAtcoCommands.getElementArray(2).getDynCommands().getElementArray(i).getCommands().length() > 3)
 		{
 			amountOfCommand++;
 		};
@@ -538,11 +534,10 @@ bool AssignmentOperatorDynCommandArrayTest()
 // Main method to read text file and input to main type (AtcoCommand Array and Occurence Array)
 void readFileGetOutput(string url, UltilType &output)
 {
-	int size = 1;
 	map<string, int> wordsMap;
 	map<string, int> commandsMap;
-	AtcoCommand *atcoCommands;
-	atcoCommands = new AtcoCommand[size];
+	DynAtcoCommandArray atcoCommands;
+	atcoCommands = DynAtcoCommandArray(1);
 
 	string line, fileName, wordSequence, commands;
 	ifstream file(url);
@@ -557,10 +552,7 @@ void readFileGetOutput(string url, UltilType &output)
 				{
 					// Finish last read AtcoCommand
 					AtcoCommand atcoCommand = AtcoCommand(fileName, wordSequence, commands);
-					atcoCommands[size - 1] = atcoCommand;
-					int newSize = size + 1;
-					resizeAtcoCommand(atcoCommands, size, newSize);
-					size++;
+					atcoCommands.add(atcoCommand);
 					commands = "";
 				}
 				fileName = line;
@@ -575,22 +567,22 @@ void readFileGetOutput(string url, UltilType &output)
 
 		// Last AtcoCommand is read
 		AtcoCommand atcoCommand = AtcoCommand(fileName, wordSequence, commands);
-		atcoCommands[size - 1] = atcoCommand;
+		atcoCommands.add(atcoCommand);
 
 		file.close();
 
 		// Count words sequence and commands into map
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < atcoCommands.getSize(); i++)
 		{
-			wordsCount(atcoCommands[i].getWordSequence(), wordsMap);
-			for (int k = 0; k < atcoCommands[i].getSizeCommands(); k++)
+			wordsCount(atcoCommands.getElementArray(i).getWordSequence(), wordsMap);
+			for (int k = 0; k < atcoCommands.getElementArray(i).getSizeCommands(); k++)
 			{
-				commandsCount(atcoCommands[i].getElementFromCommandArray(k).getMainCommands(), commandsMap);
+				commandsCount(atcoCommands.getElementArray(i).getElementFromCommandArray(k).getMainCommands(), commandsMap);
 			}
 		}
 
 		// Input data in to AtcoCommand Dynamic Array and Occurence Dynamic Array
-		output = UltilType(atcoCommands, wordsMap, commandsMap, url, size);
+		output = UltilType(atcoCommands, wordsMap, commandsMap, url);
 	}
 };
 

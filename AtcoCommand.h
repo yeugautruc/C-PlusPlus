@@ -20,7 +20,9 @@ public:
 
     AtcoCommand(std::string fileNameInput, std::string wordSequenceInput, std::string commandsInput);
 
-    AtcoCommand &operator=(const AtcoCommand &AtcocommandObject);
+    AtcoCommand(const AtcoCommand &copy);
+
+    AtcoCommand &operator=(const AtcoCommand &input);
 
     void readCommands(std::string commandsInput);
 

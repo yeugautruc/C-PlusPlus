@@ -30,13 +30,13 @@ DynCommandArray &DynCommandArray::operator=(const DynCommandArray &d2)
         {
             tmp[i] = d2.array[i];
         }
-        // bisherigen Speicher freigeben
+        // Make memory free
         delete[] array;
 
         array = nullptr;
         size = d2.size;
 
-        // Zeiger umbiegen
+        // change pointer
         array = tmp;
     }
     return *this;

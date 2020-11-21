@@ -9,6 +9,8 @@ private:
 public:
     Ocurrence(/* args */);
     Ocurrence(std::string value, int amount);
+    Ocurrence(const Ocurrence &copy);
+    Ocurrence &operator=(const Ocurrence &c);
     void setValue(std::string value);
     void setAmount(int amount);
     const std::string getValue();

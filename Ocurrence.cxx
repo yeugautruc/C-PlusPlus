@@ -1,7 +1,8 @@
 #include "Ocurrence.h"
 #include <string>
 
-Ocurrence::Ocurrence(){
+Ocurrence::Ocurrence()
+{
     value = "";
     amount = 0;
 };
@@ -10,6 +11,22 @@ Ocurrence::Ocurrence(std::string v, int a)
 {
     value = v;
     amount = a;
+};
+
+Ocurrence::Ocurrence(const Ocurrence &c)
+{
+    this->value = c.value;
+    this->amount = c.amount;
+};
+
+Ocurrence &Ocurrence::operator=(const Ocurrence &c)
+{
+    if (this != &c)
+    {
+        this->amount = c.amount;
+        this->value = c.value;
+    };
+    return *this;
 };
 
 void Ocurrence::setValue(std::string v)
