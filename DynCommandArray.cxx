@@ -2,6 +2,7 @@
 
 DynCommandArray::DynCommandArray(){
     this->size = 1;
+    this->array = new Command[1];
 };
 
 DynCommandArray::DynCommandArray(int size)
@@ -30,7 +31,9 @@ DynCommandArray &DynCommandArray::operator=(const DynCommandArray &d2)
             tmp[i] = d2.array[i];
         }
         // bisherigen Speicher freigeben
-        // delete[] array;
+        delete[] array;
+
+        array = nullptr;
         size = d2.size;
 
         // Zeiger umbiegen

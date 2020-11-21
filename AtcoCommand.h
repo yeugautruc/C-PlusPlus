@@ -30,7 +30,9 @@ public:
 
     const std::string getWordSequence();
 
-    Command getcommands(int k);
+    Command getElementFromCommandArray(int k);
+    
+    DynCommandArray getDynCommands();
 
     const int getSizeCommands();
 

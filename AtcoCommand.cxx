@@ -87,9 +87,13 @@ const std::string AtcoCommand::getTime()
 {
     return time;
 }
-Command AtcoCommand::getcommands(int k)
+Command AtcoCommand::getElementFromCommandArray(int k)
 {
     return commands.getElementArray(k);
+};
+
+DynCommandArray AtcoCommand::getDynCommands(){
+    return commands;
 };
 
 const int AtcoCommand::getSizeCommands(){

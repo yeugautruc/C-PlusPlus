@@ -9,7 +9,7 @@ DateTime::DateTime()
 	hour = 0;
 	min = 0;
 	sec = 0;
-	millisec = 0;
+	milisec = 0;
 }
 
 DateTime::DateTime(std::string date, std::string time)
@@ -24,7 +24,7 @@ DateTime::DateTime(const DateTime& input){
         this->hour = input.hour;
         this->min = input.min;
         this->sec = input.sec;
-        this->millisec = input.millisec;
+        this->milisec = input.milisec;
     }
 
 void DateTime::readData(std::string date, std::string time)
@@ -35,7 +35,7 @@ void DateTime::readData(std::string date, std::string time)
 	hour = stoi(readData(time, '-'));
 	min = stoi(readData(time, '-'));
 	sec = stoi(readData(time, '-'));
-	millisec = stoi(time);
+	milisec = stoi(time);
 }
 
 std::string DateTime::readData(std::string &input, char delimiter)
@@ -50,47 +50,47 @@ std::string DateTime::toString()
 	return " (" + std::to_string(day) + "-" + std::to_string(month) + "-" + std::to_string(year) + "-" + std::to_string(hour) + ":" + std::to_string(min) + ":" + std::to_string(sec) + "):";
 }
 
-void DateTime::setYear(int year){
-	this->year = year;
+void DateTime::setYear(int y){
+	this->year = y;
 };
-void DateTime::setMonth(int month){
-	this->month = month;
+void DateTime::setMonth(int m){
+	this->month = m;
 };
-void DateTime::setDay(int day){
-	this->day = day;
+void DateTime::setDay(int d){
+	this->day = d;
 };
-void DateTime::setHour(int hour){
-	this->hour = hour;
+void DateTime::setHour(int h){
+	this->hour = h;
 };
-void DateTime::setMin(int min){
-	this->min = min;
+void DateTime::setMin(int m){
+	this->min = m;
 };
-void DateTime::setSec(int sec){
-	this->sec = sec;
+void DateTime::setSec(int s){
+	this->sec = s;
 };
-void DateTime::setMilisec(int milisec){
-	this->millisec = milisec;
+void DateTime::setMilisec(int ms){
+	this->milisec = ms;
 };
 
-const int DateTime::getYear(int year){
+const int DateTime::getYear(){
 	return year;
 };
-const int DateTime::getMonth(int month){
+const int DateTime::getMonth(){
 	return month;
 };
-const int DateTime::getDay(int day){
+const int DateTime::getDay(){
 	return day;
 };
-const int DateTime::getHour(int hour){
+const int DateTime::getHour(){
 	return hour;
 };
-const int DateTime::getMin(int min){
+const int DateTime::getMin(){
 	return min;
 };
-const int DateTime::getSec(int sec){
+const int DateTime::getSec(){
 	return sec;
 };
-const int DateTime::getMilisec(int milisec){
+const int DateTime::getMilisec(){
 	return milisec;
 };
 
