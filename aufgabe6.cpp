@@ -257,7 +257,7 @@ struct UltilType
 	map<string, int> commandsMap;
 
 	// Two dynamic array to save Occurence and AtcoCommand
-	Ocurrence *ocurrences;
+	DynOcurrenceArray DynOcurrences;
 	DynAtcoCommandArray DynAtcoCommands;
 
 	int lengthArray{};
@@ -266,7 +266,7 @@ struct UltilType
 	UltilType()
 	{
 		DynAtcoCommands = DynAtcoCommandArray(1);
-		ocurrences = new Ocurrence[1];
+		DynOcurrences = DynOcurrenceArray(1);
 	}
 
 	// Constructor to get AtcoCommand from
@@ -275,7 +275,7 @@ struct UltilType
 		int sizeA = 1;
 		int sizeO = 1;
 		DynAtcoCommands = DynAtcoCommandArray(sizeA);
-		ocurrences = new Ocurrence[sizeO];
+		DynOcurrences = DynOcurrenceArray(sizeO);
 
 		DynAtcoCommands = arr;
 
@@ -290,11 +290,7 @@ struct UltilType
 
 			// Keep occurence in to dynamic array
 			Ocurrence ocur = Ocurrence(word, count);
-			ocurrences[sizeO - 1] = ocur;
-			int newSize = sizeO + 1;
-			// Resize array after add to get more space for new one
-			resizeOcurrence(ocurrences, sizeO, newSize);
-			sizeO++;
+			DynOcurrences.add(ocur);
 		};
 
 		lengthArray = arr.getSize();
