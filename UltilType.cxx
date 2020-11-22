@@ -122,7 +122,7 @@ std::string UltilType::topWords(std::map<std::string, int> &M)
 };
 
 // Get top commands
-std::string UltilType::topCommands(std::map<std::string, int> &M, int amount, std::string url)
+std::string UltilType::topCommands(std::map<std::string, int> &M, int amount, std::string fileName)
 {
 	std::string output = "";
 	std::vector<std::pair<std::string, int>> A;
@@ -141,7 +141,7 @@ std::string UltilType::topCommands(std::map<std::string, int> &M, int amount, st
 		sizeB = A.size();
 	}
 	std::vector<std::pair<std::string, int>> B(A.begin(), A.begin() + sizeB);
-	output += "The top" + std::to_string(amount) + " type occurences specified in " + url + "\n";
+	output += "The top" + std::to_string(amount) + " type occurences specified in " + fileName + "\n";
 	int counter = 1;
 	for (auto &it : B)
 	{
