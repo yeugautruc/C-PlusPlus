@@ -20,6 +20,8 @@ public:
 
     DateTime(const DateTime& input);
 
+    DateTime &operator=(const DateTime &input);
+
     void readData(std::string date, std::string time);
 
     std::string readData(std::string &input, char delimiter);

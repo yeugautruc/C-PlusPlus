@@ -22,28 +22,28 @@ AtcoCommand::AtcoCommand(std::string fileNameInput, std::string wordSequenceInpu
 
 AtcoCommand::AtcoCommand(const AtcoCommand &copy)
 {
-    this->commands = copy.commands;
+    this->commands = copy.commands; // type DynCommandArray have their own assignment operator
     this->date = copy.date;
     this->time = copy.time;
     this->fileName = copy.fileName;
     this->wordSequence = copy.wordSequence;
-    this->formattedDateTime = copy.formattedDateTime;
+    this->formattedDateTime = copy.formattedDateTime; // type DateTime have their own assignment operator
 };
 
 AtcoCommand &AtcoCommand::operator=(const AtcoCommand &input)
 {
     if (this != &input)
     {
-        this->commands = input.commands;
+        this->commands = input.commands; // type DynCommandArray have their own assignment operator
         this->date = input.date;
         this->time = input.time;
         this->fileName = input.fileName;
         this->wordSequence = input.wordSequence;
-        this->formattedDateTime = input.formattedDateTime;
+        this->formattedDateTime = input.formattedDateTime; // type DateTime have their own assignment operator
     };
 
     return *this;
-}
+};
 
 void AtcoCommand::readCommands(std::string commandsInput)
 {
