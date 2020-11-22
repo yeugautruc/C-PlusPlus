@@ -57,7 +57,7 @@ std::string UltilType::getTopWords()
 // Print method
 void UltilType::print()
 {
-	for (size_t i = 0; i < unsigned(lengthArray); i++)
+	for (int i = 0; i < lengthArray; i++)
 	{
 		if (DynAtcoCommands.getElementArray(i).toString().length() > 10)
 		{
