@@ -13,7 +13,7 @@ DynAtcoCommandArray::DynAtcoCommandArray(int size)
 };
 
 DynAtcoCommandArray::~DynAtcoCommandArray(){
-
+    delete[] array;
 };
 
 DynAtcoCommandArray::DynAtcoCommandArray(const DynAtcoCommandArray &d2)

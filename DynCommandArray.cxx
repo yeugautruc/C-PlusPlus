@@ -74,7 +74,7 @@ bool DynCommandArray::istElem(Command *v) const
 };
 
 DynCommandArray::~DynCommandArray(){
-
+    delete[] array;
 };
 
 void DynCommandArray::resizeCommand(Command *&inputArray, int &oldSize, int &newSize)

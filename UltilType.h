@@ -25,6 +25,5 @@ private:
     // Two dynamic array to save Occurence and AtcoCommand
     DynOcurrenceArray DynOcurrences;
     DynAtcoCommandArray DynAtcoCommands;
-
     int lengthArray{};
 };

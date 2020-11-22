@@ -13,7 +13,7 @@ DynOcurrenceArray::DynOcurrenceArray(int size)
 };
 
 DynOcurrenceArray::~DynOcurrenceArray(){
-
+    delete[] array;
 };
 
 DynOcurrenceArray::DynOcurrenceArray(const DynOcurrenceArray &d2)

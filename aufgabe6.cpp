@@ -327,7 +327,11 @@ bool CanReadMoreThanSixCommandTest(UltilType input)
 
 /* Create an dynamic command array d1 with 10 elements.
 Use copy constructor, copy d1 to d2.Check if all elements
-of d2 is correct copied from d1 and have same size with d1.*/
+of d2 is correct copied from d1 and have same size with d1.
+
+I dont want just check test crash when copy constructor not work.
+I also need content test (may be copy constructor work,
+but copy content is not correct, then crash test make no sense)*/
 bool CopyConstructorDynCommandArrayTest()
 {
 	Command cmd = Command("BAW52CV INIT_RESPONSE");
@@ -360,7 +364,11 @@ bool CopyConstructorDynCommandArrayTest()
 
 /* Create an dynamic atcoCommand array d1 with 10 elements.
 Use copy constructor, copy d1 to d2.Check if all elements
-of d2 is correct copied from d1 and have same size with d1.*/
+of d2 is correct copied from d1 and have same size with d1.
+
+I dont want just check test crash when copy constructor not work.
+I also need content test (may be copy constructor work,
+but copy content is not correct, then crash test make no sense)*/
 bool CopyConstructorDynAtcoCommandArrayTest()
 {
 	AtcoCommand atcCmd = AtcoCommand("2019-02-15__11-32-02-00:", "word sequence", "BAW52CV INIT_RESPONSE");
@@ -393,7 +401,11 @@ bool CopyConstructorDynAtcoCommandArrayTest()
 
 /* Create an dynamic Ocurrence array d1 with 10 elements.
 Use copy constructor, copy d1 to d2.Check if all elements
-of d2 is correct copied from d1 and have same size with d1.*/
+of d2 is correct copied from d1 and have same size with d1.
+
+I dont want just check test crash when copy constructor not work.
+I also need content test (may be copy constructor work,
+but copy content is not correct, then crash test make no sense)*/
 bool CopyConstructorDynOcurrenceArrayTest()
 {
 	Ocurrence ocur = Ocurrence("value", 5);
@@ -673,7 +685,17 @@ int main(int argc, char *argv[])
 	// Check if input parameter require test
 	if (argc > 1 && string(argv[1]) == "--test")
 	{
-		return runTests(defaultOpenFile);
+		return	runTests(defaultOpenFile);
+	}
+
+	// Check if input parameter require stress test
+	if (argc > 1 && string(argv[1]) == "--stresstest")
+	{
+		while (1)
+		{
+			runTests(defaultOpenFile);
+		}
+		return 0;
 	}
 
 	// If input parameter is read, read input data
