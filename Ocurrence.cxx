@@ -49,4 +49,8 @@ const int Ocurrence::getAmount()
     return amount;
 };
 
+std::string Ocurrence::toString(){
+    return "Value: " + value + "\nAmount: "+ std::to_string(amount);
+};
+
 Ocurrence::~Ocurrence(){};

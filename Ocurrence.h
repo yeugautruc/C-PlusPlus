@@ -15,5 +15,6 @@ public:
     void setAmount(int amount);
     const std::string getValue();
     const int getAmount();
+    std::string toString();
     ~Ocurrence();
 };

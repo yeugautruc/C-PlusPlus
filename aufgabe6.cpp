@@ -184,6 +184,7 @@ void readFileGetOutput(string url, UltilType &output)
 			wordsCount(atcoCommands.getElementArray(i).getWordSequence(), wordsMap);
 			for (int k = 0; k < atcoCommands.getElementArray(i).getSizeCommands(); k++)
 			{
+				// save only expected command type (main commands) into commandsMap (use to print out later)
 				commandsCount(atcoCommands.getElementArray(i).getElementFromCommandArray(k).getMainCommands(), commandsMap);
 			}
 		}
@@ -194,7 +195,6 @@ void readFileGetOutput(string url, UltilType &output)
 };
 /* End methods to use
 ---------------------------*/
-
 
 /* All test methods above:
 existsTest								check if able to acces file
@@ -478,7 +478,6 @@ int runTests(string file)
 
 // End test methods
 /*________________________________________________________*/
-
 
 /*Main method
 ---------------------------*/
