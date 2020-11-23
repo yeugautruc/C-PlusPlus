@@ -349,7 +349,7 @@ bool CopyConstructorDynCommandArrayTest()
 	// Check d2 is coppied
 	for (int i = 0; i < 10; i++)
 	{
-		if (d2.getElementArray(i).getMainCommands() != "INIT_RESPONSE")
+		if (d2.getElementArray(i).getMainCommands().find("INIT_RESPONSE") == -1)
 		{
 			return false;
 		}
@@ -386,7 +386,7 @@ bool CopyConstructorDynAtcoCommandArrayTest()
 	// Check d2 is coppied
 	for (int i = 0; i < 10; i++)
 	{
-		if (d2.getElementArray(i).getWordSequence() != "word sequence")
+		if (d2.getElementArray(i).getWordSequence().find("word sequence") == -1)
 		{
 			return false;
 		}
@@ -423,7 +423,7 @@ bool CopyConstructorDynOcurrenceArrayTest()
 	// Check d2 is coppied
 	for (int i = 0; i < 10; i++)
 	{
-		if (d2.getElementArray(i).getValue() != "value")
+		if (d2.getElementArray(i).getValue().find("value") == -1)
 		{
 			return false;
 		}
@@ -469,7 +469,7 @@ bool AssignmentOperatorDynCommandArrayTest()
 	}
 	for (int i = 0; i < d2.getSize() - 1; i++)
 	{
-		if (d2.getElementArray(i).getMainCommands() != "INIT_RESPONSE")
+		if (d2.getElementArray(i).getMainCommands().find("INIT_RESPONSE") == -1)
 		{
 			return false;
 		};
@@ -511,7 +511,7 @@ bool AssignmentOperatorDynAtcoCommandArrayTest()
 	}
 	for (int i = 0; i < d2.getSize() - 1; i++)
 	{
-		if (d2.getElementArray(i).getWordSequence() != "word sequence")
+		if (d2.getElementArray(i).getWordSequence().find("word sequence") == -1)
 		{
 			return false;
 		};
@@ -553,7 +553,7 @@ bool AssignmentOperatorDynOcurrenceArrayTest()
 	}
 	for (int i = 0; i < d2.getSize() - 1; i++)
 	{
-		if (d2.getElementArray(i).getValue() != "value")
+		if (d2.getElementArray(i).getValue().find("value") == -1)
 		{
 			return false;
 		};
@@ -685,7 +685,7 @@ int main(int argc, char *argv[])
 	// Check if input parameter require test
 	if (argc > 1 && string(argv[1]) == "--test")
 	{
-		return	runTests(defaultOpenFile);
+		return runTests(defaultOpenFile);
 	}
 
 	// Check if input parameter require stress test
